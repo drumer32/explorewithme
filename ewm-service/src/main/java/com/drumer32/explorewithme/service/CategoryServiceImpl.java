@@ -7,6 +7,7 @@ import com.drumer32.explorewithme.tools.ModelMapperConfig;
 import com.drumer32.explorewithme.storage.CategoryStorage;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -21,7 +22,7 @@ import java.util.NoSuchElementException;
 public class CategoryServiceImpl implements CategoryService {
 
     private CategoryStorage categoryStorage;
-    private ModelMapperConfig mapper;
+    private ModelMapper mapper;
 
     @Override
     public Category addCategory(@NotNull Category category) {
@@ -53,7 +54,7 @@ public class CategoryServiceImpl implements CategoryService {
         log.info("Запрос на получение всех категорий");
         Pageable pageable = PageRequest.of(from, size);
         return categoryStorage.findAll(pageable).getContent().stream()
-                .map(category -> mapper.map().map(category, CategoryDto.class))
+                .map(category -> mapper.map(category, CategoryDto.class))
                 .toList();
     }
 

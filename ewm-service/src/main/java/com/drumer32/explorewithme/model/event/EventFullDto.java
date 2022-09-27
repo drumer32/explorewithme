@@ -13,12 +13,8 @@ public class EventFullDto {
     String annotation;
     CategoryDto category;
     Integer confirmedRequests;
-
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     LocalDateTime createdOn;
     String description;
-
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     LocalDateTime eventDate;
     Integer id;
     UserShortDto initiator;

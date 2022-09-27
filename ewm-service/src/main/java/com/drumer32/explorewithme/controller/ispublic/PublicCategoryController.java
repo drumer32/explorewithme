@@ -5,6 +5,7 @@ import com.drumer32.explorewithme.model.exception.ObjectNotFoundException;
 import com.drumer32.explorewithme.tools.ModelMapperConfig;
 import com.drumer32.explorewithme.service.CategoryService;
 import lombok.AllArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,7 +16,7 @@ import java.util.List;
 public class PublicCategoryController {
 
     private final CategoryService categoryService;
-    private final ModelMapperConfig mapper;
+    private final ModelMapper mapper;
 
     @GetMapping()
     public List<CategoryDto> getCategories(@RequestParam(defaultValue = "0") Integer from,
@@ -25,6 +26,6 @@ public class PublicCategoryController {
 
     @GetMapping("/{catId}")
     public CategoryDto getCategoryById(@PathVariable Integer catId) throws ObjectNotFoundException {
-        return mapper.map().map(categoryService.getCategory(catId), CategoryDto.class);
+        return mapper.map(categoryService.getCategory(catId), CategoryDto.class);
     }
 }

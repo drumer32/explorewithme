@@ -1,17 +1,16 @@
 package com.drumer32.explorewithme.model.comment;
 
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
-@Getter
-@Setter
-@ToString
+
+@Data
+@AllArgsConstructor
 @RequiredArgsConstructor
+@Builder
 @Entity
 @Table(name = "comments")
 public class Comment {
@@ -21,5 +20,9 @@ public class Comment {
     Integer id;
 
     String text;
+    Integer author;
+    Integer eventId;
+    Integer likes;
+    Integer dislikes;
     LocalDateTime created;
 }

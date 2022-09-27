@@ -7,6 +7,7 @@ import com.drumer32.explorewithme.tools.ModelMapperConfig;
 import com.drumer32.explorewithme.storage.CompilationStorage;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -23,7 +24,7 @@ public class CompilationServiceImpl implements CompilationService {
 
     private CompilationStorage compilationStorage;
 
-    private ModelMapperConfig mapper;
+    private ModelMapper mapper;
     @Override
     public Compilation createCompilation(@NotNull Compilation compilation) {
         log.info("Запрос на создание подборки {}", compilation.getTitle());
@@ -75,7 +76,7 @@ public class CompilationServiceImpl implements CompilationService {
         Page<Compilation> compilationPage = compilationStorage.findAllByPinnedIsTrue(pageable);
         return compilationPage.getContent()
                 .stream()
-                .map(compilation -> mapper.map().map(compilation, CompilationDto.class))
+                .map(compilation -> mapper.map(compilation, CompilationDto.class))
                 .toList();
     }
 
@@ -88,6 +89,6 @@ public class CompilationServiceImpl implements CompilationService {
         } catch (NoSuchElementException e) {
             throw new ObjectNotFoundException("Подборка не найдена");
         }
-        return mapper.map().map(compilation, CompilationDto.class);
+        return mapper.map(compilation, CompilationDto.class);
     }
 }

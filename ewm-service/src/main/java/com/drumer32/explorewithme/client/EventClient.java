@@ -1,25 +1,17 @@
 package com.drumer32.explorewithme.client;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.web.client.RestTemplateBuilder;
-import org.springframework.stereotype.Service;
-import org.springframework.web.util.DefaultUriBuilderFactory;
+import lombok.Setter;
+import org.springframework.web.client.RestTemplate;
 
 import javax.servlet.http.HttpServletRequest;
 
-@Service
 public class EventClient extends BaseClient {
 
-    @Value("${appName}")
+    @Setter
     private String appName;
 
-    @Autowired
-    public EventClient(@Value("${serviceUrl}") String serverUrl, RestTemplateBuilder builder) {
-        super(builder
-                .uriTemplateHandler(new DefaultUriBuilderFactory(serverUrl))
-                .build()
-        );
+    public EventClient(RestTemplate restTemplate) {
+        super(restTemplate);
     }
 
     public void addRequest(HttpServletRequest request) {

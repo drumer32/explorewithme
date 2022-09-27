@@ -14,7 +14,6 @@ import java.time.LocalDateTime;
 @Table(name = "requests")
 public class ParticipationRequest {
 
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     LocalDateTime created;
     Integer event;
 

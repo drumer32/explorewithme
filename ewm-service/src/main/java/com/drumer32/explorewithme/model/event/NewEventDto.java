@@ -13,13 +13,10 @@ public class NewEventDto {
     String annotation;
     Integer category;
     String description;
-
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     LocalDateTime eventDate;
     Location location;
     boolean paid;
     Integer participantLimit;
     boolean requestModeration;
     String title;
-    List<Integer> comments;
 }

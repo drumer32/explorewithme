@@ -9,6 +9,7 @@ import com.drumer32.explorewithme.model.exception.ObjectNotFoundException;
 import com.drumer32.explorewithme.tools.ModelMapperConfig;
 import com.drumer32.explorewithme.service.EventService;
 import lombok.AllArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -23,7 +24,7 @@ import java.util.List;
 public class PublicEventController {
 
     private final EventService eventService;
-    private final ModelMapperConfig mapper;
+    private final ModelMapper mapper;
     private final EventClient client;
 
     @GetMapping
@@ -48,7 +49,7 @@ public class PublicEventController {
         client.addRequest(request);
         Event event = eventService.get(id);
         if (event.getState().equals(State.PUBLISHED)) {
-            return mapper.map().map(event, EventShortDto.class);
+            return mapper.map(event, EventShortDto.class);
         } else throw new AccessException("Данная опция доступна зарегистрированным пользователям и администратору");
     }
 }
