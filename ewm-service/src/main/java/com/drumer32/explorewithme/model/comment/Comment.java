@@ -12,6 +12,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @Builder
 @Entity
+
 @Table(name = "comments")
 public class Comment {
 
