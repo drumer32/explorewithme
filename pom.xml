@@ -14,8 +14,8 @@
 	<version>0.0.1-SNAPSHOT</version>
 
 	<modules>
-		<module>server</module>
-		<module>stat</module>
+		<module>ewm-service</module>
+		<module>ewm-stats</module>
 	</modules>
 
 	<name>explorewithme</name>
