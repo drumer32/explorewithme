@@ -17,7 +17,7 @@ public interface EventService {
                                   LocalDateTime rangeStart, LocalDateTime rangeEnd, Integer from, Integer size);
     Event updateEvent(Integer id, NewEventDto event) throws ObjectNotFoundException;
     Event rejectEvent(Integer id) throws ObjectNotFoundException;
-    Event get(Integer id) throws ObjectNotFoundException;
+    Event get(int id) throws ObjectNotFoundException;
     List<Event> getEventsByCreator(Integer userId, Integer from, Integer size);
 
     List<EventShortDto> getEventsForPublic(String text, List<Integer> categories, Boolean paid,

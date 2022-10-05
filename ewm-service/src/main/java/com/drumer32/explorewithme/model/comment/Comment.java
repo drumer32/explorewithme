@@ -24,6 +24,12 @@ public class Comment {
     Integer author;
     Integer eventId;
     Integer likes;
+
+    @ElementCollection
+    List<Integer> whoLiked;
+    @ElementCollection
+    List<Integer> whoDisliked;
+
     Integer dislikes;
     LocalDateTime created;
 }
