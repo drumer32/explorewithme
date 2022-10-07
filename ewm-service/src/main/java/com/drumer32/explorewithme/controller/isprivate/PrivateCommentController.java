@@ -18,7 +18,7 @@ public class PrivateCommentController {
     @PostMapping("/{eventId}/comments")
     public EventFullDto createComment(@PathVariable Integer eventId,
                                      @RequestParam Integer userId,
-                                     @RequestParam String text) throws ObjectNotFoundException, ConflictException, BadConditionException {
+                                     @RequestBody String text) throws ObjectNotFoundException, ConflictException, BadConditionException {
         return commentService.createComment(eventId, userId, text);
     }
 
@@ -30,7 +30,7 @@ public class PrivateCommentController {
     }
 
     @PatchMapping("/{userId}/comments/{commentId}")
-    public EventFullDto changeComment(@RequestParam String text,
+    public EventFullDto changeComment(@RequestBody String text,
                                       @PathVariable Integer userId,
                                       @PathVariable Integer commentId) throws ConflictException, ObjectNotFoundException {
         return commentService.changeComment(text, userId, commentId);
