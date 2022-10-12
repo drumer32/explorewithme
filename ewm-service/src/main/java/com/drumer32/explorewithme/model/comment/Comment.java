@@ -12,6 +12,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @Builder
 @Entity
+
 @Table(name = "comments")
 public class Comment {
 
@@ -23,6 +24,12 @@ public class Comment {
     Integer author;
     Integer eventId;
     Integer likes;
+
+    @ElementCollection
+    List<Integer> whoLiked;
+    @ElementCollection
+    List<Integer> whoDisliked;
+
     Integer dislikes;
     LocalDateTime created;
 }

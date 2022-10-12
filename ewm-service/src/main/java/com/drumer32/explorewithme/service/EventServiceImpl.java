@@ -62,7 +62,7 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
-    public Event get(Integer id) throws ObjectNotFoundException {
+    public Event get(int id) throws ObjectNotFoundException {
         log.info("Запрос на получение события {}", id);
         return eventStorage.findById(id).orElseThrow(() -> new ObjectNotFoundException("Событие не найдено"));
     }

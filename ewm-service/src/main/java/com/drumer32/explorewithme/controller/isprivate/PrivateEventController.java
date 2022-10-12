@@ -4,11 +4,9 @@ import com.drumer32.explorewithme.model.event.Event;
 import com.drumer32.explorewithme.model.event.EventFullDto;
 import com.drumer32.explorewithme.model.event.NewEventDto;
 import com.drumer32.explorewithme.model.exception.AccessException;
-import com.drumer32.explorewithme.model.exception.ConflictException;
 import com.drumer32.explorewithme.model.exception.ObjectNotFoundException;
 import com.drumer32.explorewithme.model.exception.BadConditionException;
 import com.drumer32.explorewithme.model.requests.ParticipationRequest;
-import com.drumer32.explorewithme.service.CommentService;
 import com.drumer32.explorewithme.tools.EventDtoMapper;
 import com.drumer32.explorewithme.service.EventService;
 import com.drumer32.explorewithme.service.RequestService;
@@ -26,7 +24,6 @@ public class PrivateEventController {
     private final EventService eventService;
     private final RequestService requestService;
     private final EventDtoMapper mapper;
-    private final CommentService commentService;
 
     @GetMapping("/{userId}/events")
     public List<EventFullDto> getEvents(@PathVariable Integer userId,
@@ -81,38 +78,5 @@ public class PrivateEventController {
                                               @PathVariable Integer reqId,
                                               @PathVariable Integer userId) throws ObjectNotFoundException {
         return requestService.reject(eventId, reqId, userId);
-    }
-
-    @PostMapping("/events/{eventId}/comments")
-    public EventFullDto leaveComment(@PathVariable Integer eventId,
-                                     @RequestParam Integer userId,
-                                     @RequestParam String text) throws ObjectNotFoundException, ConflictException {
-        return commentService.leaveComment(eventId, userId, text);
-    }
-
-    @DeleteMapping("/events/{eventId}/comments/{commentId}")
-    public void deleteComment(@PathVariable Integer eventId,
-                              @RequestParam Integer userId,
-                              @PathVariable Integer commentId) throws ObjectNotFoundException, ConflictException {
-        commentService.deleteComment(eventId, userId, commentId);
-    }
-
-    @PatchMapping("/{userId}/comments/{commentId}")
-    public EventFullDto changeComment(@RequestParam String text,
-                                      @PathVariable Integer userId,
-                                      @PathVariable Integer commentId) throws ConflictException, ObjectNotFoundException {
-        return commentService.changeComment(text, userId, commentId);
-    }
-
-    @PatchMapping("/{userId}/comments/{commentId}/like")
-    public void likeComment(@PathVariable Integer userId,
-                            @PathVariable Integer commentId) throws ConflictException, ObjectNotFoundException {
-        commentService.likeComment(commentId, userId);
-    }
-
-    @PatchMapping("/{userId}/comments/{commentId}/dislike")
-    public void dislikeComment(@PathVariable Integer userId,
-                               @PathVariable Integer commentId) throws ConflictException, ObjectNotFoundException {
-        commentService.dislikeComment(commentId, userId);
     }
 }
